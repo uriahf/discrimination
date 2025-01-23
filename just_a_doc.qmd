@@ -1,0 +1,149 @@
+---
+title: "just_a_doc"
+format: 
+  html:
+    html-table-processing: none
+---
+
+## Quarto
+
+```{r}
+library(rtichoke)
+
+performance_data_example <- prepare_performance_data(
+  probs = list(
+    c(0.72, 0.63, 0.47, 0.45, 0.33, 0.31, 0.29, 0.18, 0.15, 0.11)
+  ),
+  reals = list(
+    c(1, 1, 0, 1, 0, 1, 0, 0, 0, 0)
+  ),
+  by = 0.1, stratified_by = "ppcr"
+)
+
+bar_chart_new <- function(value, display, color = "red"){
+  
+  display_metric <- glue::glue("{display} <br> ({round(display / 10, digits = 1)}%)")
+  
+  glue::glue("<span style=\"display: inline-block;direction: ltr;
+             border-radius: 4px; padding-right: 2px;
+             background-color: {color}; color: black;
+             width: {value}%\">{display_metric}</span>") %>% 
+    as.character() %>% 
+    gt::html()
+}
+
+add_color_to_confusion_metric_new <- function(performance_dat, metric, color) {
+  performance_dat %>%
+    dplyr::mutate(metric_plot = 100 * {{ metric }} / 10, metric_plot = purrr::map2(metric_plot, {{ metric }}, .f = ~ bar_chart_new(
+      value = .x, display = .y, color = color
+    ))) %>%
+    dplyr::mutate(`:=`({{ metric }}, .data$metric_plot)) %>%
+    dplyr::select(-.data$metric_plot)
+}
+
+list_per_ppcr <- performance_data_example %>%
+  split(., .$ppcr)
+
+
+confusion_matrix_list <- performance_data_example |>
+  dplyr::mutate(n_obs = 10,
+                predicted_negatives = TN + FN,
+                predicted_positives = TP + FP,
+                real_negatives = TN + FP,
+                real_positives = TP + FN) |> 
+  add_color_to_confusion_metric_new(predicted_negatives, "lightgray")|> 
+  add_color_to_confusion_metric_new(real_negatives, "lightgray")|> 
+  add_color_to_confusion_metric_new(real_positives, "lightgray")|> 
+  add_color_to_confusion_metric_new(TP, "lightgreen") %>% 
+  add_color_to_confusion_metric_new(TN, "lightgreen") %>% 
+  add_color_to_confusion_metric_new(FP, "pink") %>% 
+  add_color_to_confusion_metric_new(FN, "pink") |> 
+  add_color_to_confusion_metric_new(n_obs, "lightgray")|>
+  add_color_to_confusion_metric_new(predicted_positives, "lightgray")|> 
+  dplyr::select(ppcr, TP, TN, FP, FN, 
+                predicted_positives, 
+                real_negatives,
+                real_positives,
+                predicted_negatives,
+                n_obs) 
+
+turn_performance_data_to_confusion_matrix_gt <- function(performance_data_gt) {
+  
+  tibble::tibble(
+    reals = c("**Real<br>Positives** ", "**Real<br>Negatives**", ""),
+    predicted_positives = c(
+      performance_data_gt$TP,
+      performance_data_gt$FP,
+      performance_data_gt$predicted_positives), 
+    predicted_negatives = c(
+      performance_data_gt$FN,
+      performance_data_gt$TN, 
+      performance_data_gt$predicted_negatives
+    ),
+    margin = c(
+      performance_data_gt$real_positives, 
+      performance_data_gt$real_negatives, 
+      performance_data_gt$n_obs
+    )) |> 
+    gt::gt(rowname_col = "reals") |> 
+    gt::cols_label(
+      margin = "",
+      predicted_positives = gt::md("**Predicted<br>Positives**"),
+      predicted_negatives = gt::md("**Predicted<br>Negatives**")
+    ) |>
+   gt::fmt_markdown(columns = reals) %>%
+    gt::cols_width(
+      gt::everything() ~ px(100)
+    )
+    
+  
+}
+
+
+
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+
+confusion_matrix_list[4,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |> gt::as_raw_html()
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## new
+
+```{r}
+tibble::tibble(
+    reals = c("**Real<br>Positives** ", "**Real<br>Negatives**", ""),
+    predicted_positives = c(
+      " ",
+      " ",
+      " "), 
+    predicted_negatives = c(
+      " ",
+      " ", 
+      " "
+    ),
+    margin = c(
+      confusion_matrix_list[2,]$real_positives, 
+      confusion_matrix_list[2,]$real_negatives, 
+      confusion_matrix_list[2,]$n_obs
+    )) |> 
+    gt::gt(rowname_col = "reals") |> 
+    gt::cols_label(
+      margin = "",
+      predicted_positives = gt::md("**Predicted<br>Positives**"),
+      predicted_negatives = gt::md("**Predicted<br>Negatives**")
+    ) |>
+   gt::fmt_markdown(columns = reals) |> 
+    gt::cols_width(
+      gt::everything() ~ px(100)
+    ) |>
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>   
+  gt::as_raw_html()
+```

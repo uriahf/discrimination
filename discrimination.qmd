@@ -3,6 +3,7 @@ title: "discrimination"
 format:
   revealjs:
     incremental: true
+    html-table-processing: none
 preload-iframes: true
 ---
 
@@ -679,7 +680,7 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 
 ![](line%20of%20patients/line%20-%20Copy%20-%20Copy%2001.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 performance_data_example <- prepare_performance_data(
@@ -775,8 +776,8 @@ turn_performance_data_to_confusion_matrix_gt <- function(performance_data_gt) {
 
 confusion_matrix_list[2,] |>
   turn_performance_data_to_confusion_matrix_gt() |> 
-  gt::cols_align(align = "left", columns = dplyr::everything()) |>
-  gt::as_raw_html()
+  gt::cols_align(align = "left", columns = dplyr::everything()) #|>
+  # gt::as_raw_html()
 
 ```
 :::
@@ -838,11 +839,11 @@ create_rtichoke_curve_by_frame(
 
 ```
 :::
-:::
+:::::
 
 ## Prevalence
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -882,7 +883,7 @@ tibble::tibble(
 ::: {.column width="50%"}
 $$\frac{\sum \text{Real-Positives}}{\sum \text{Observations}} = \frac{4}{10}$$
 :::
-:::
+:::::
 
 ```{r}
 
@@ -916,7 +917,7 @@ tibble::tibble(
 
 ## PPCR
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -956,7 +957,7 @@ tibble::tibble(
 ::: {.column width="50%"}
 $$\frac{\sum \text{Predicted-Positives}}{\sum \text{Observations}} = \frac{3}{10}$$
 :::
-:::
+:::::
 
 ```{r}
 
@@ -993,7 +994,7 @@ tibble::tibble(
 
 ![](line%20of%20patients/line_ppcr_0.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1012,13 +1013,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 1)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_01.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1037,13 +1038,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 2)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_02.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1063,13 +1064,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 3)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_03.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1089,13 +1090,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 4)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_04.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1115,13 +1116,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 5)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_05.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1141,13 +1142,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 6)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_06.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 
@@ -1167,13 +1168,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 7)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_07.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 # N <- 10
@@ -1203,13 +1204,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 8)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_08.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 <!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
 
@@ -1248,13 +1249,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 9)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_09.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 <!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
 
@@ -1280,13 +1281,13 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 10)
 ```
 :::
-:::
+:::::
 
 ## 
 
 ![](line%20of%20patients/line_ppcr_1.svg)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 <!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
 
@@ -1324,7 +1325,7 @@ create_rtichoke_curve_by_frame(
   performance_data_example, "lift", 11)
 ```
 :::
-:::
+:::::
 
 ## 
 
@@ -1336,7 +1337,7 @@ create_rtichoke_curve_by_frame(
 
 ![](line%20of%20patients/line_ppcr_01_before.svg)
 
-::: columns
+::::: columns
 ::: {.column width="70%"}
 ![](line%20of%20patients/line_ppcr_01_before.svg)
 
@@ -1401,11 +1402,11 @@ prepare_performance_data(
     plot_lift_curve(size = 300)
 ```
 :::
-:::
+:::::
 
 ## 
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ### Healthcare
 
@@ -1421,11 +1422,11 @@ The event of disease 🤢 is [negative]{style="background-color: pink;"}
 
 The event of purchase 💳 is [positive]{style="background-color: lightgreen;"}
 :::
-:::
+:::::
 
 ## 
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ### Healthcare
 
@@ -1445,11 +1446,11 @@ Best Strategy: Don't Treat!
 
 Don't wake up a sleeping dog 🐶
 :::
-:::
+:::::
 
 ## 
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ### Healthcare
 
@@ -1469,11 +1470,11 @@ Best Strategy: Don't Treat!
 
 Purchase anyway 🤗
 :::
-:::
+:::::
 
 ## 
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ### Healthcare
 
@@ -1493,11 +1494,11 @@ Best Strategy: Don't Treat!
 
 No purchase anyway 😒
 :::
-:::
+:::::
 
 ## 
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ### Healthcare
 
@@ -1517,7 +1518,7 @@ Best Strategy: Treat! 📞
 
 Will buy if engaged 🤔
 :::
-:::
+:::::
 
 ## PPCR of 0.1
 
@@ -1618,14 +1619,14 @@ Will buy if engaged 🤔
 
 ## PPCR of 0.1
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 ![](line%20of%20patients/line_ppcr_01_before.svg)
 :::
 
 ::: {.column width="40%"}
 :::
-:::
+:::::
 
 ## PPCR of 0.1
 
@@ -1682,7 +1683,7 @@ create_roc_curve(
 
 ### Why 1 - Specificity? Why not just Specificity? 🙃
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 Honestly, I didn't find anywhere why *1 - Specificity* is more insightful than just *Specificity.*
 :::
@@ -1703,13 +1704,13 @@ create_roc_curve(
     )
 ```
 :::
-:::
+:::::
 
 ## Why I don't like ROC Curve 😤 {.smaller}
 
 ### Why 1 - Specificity? Why not just Specificity? 🙃
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 Honestly, I didn't find anywhere why *1 - Specificity* is more insightful than just *Specificity.*
 :::
@@ -1766,7 +1767,7 @@ plotly::plot_ly(
     )
 ```
 :::
-:::
+:::::
 
 ## Why I don't like ROC Curve 😤
 
@@ -2040,7 +2041,7 @@ original_gt_sorted
 
 ------------------------------------------------------------------------
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 split_gt_events
@@ -2052,7 +2053,7 @@ split_gt_events
 split_gt_nonevents
 ```
 :::
-:::
+:::::
 
 ![](cindex_binary_0.svg){fig-align="center"}
 
@@ -2060,7 +2061,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events |>
@@ -2096,7 +2097,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_1_a.svg){fig-align="center"}
 
@@ -2104,7 +2105,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events|>
@@ -2140,7 +2141,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_1_b.svg){fig-align="center"}
 
@@ -2148,7 +2149,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events |>
@@ -2184,7 +2185,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_2_a.svg){fig-align="center"}
 
@@ -2192,7 +2193,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events |>
@@ -2228,7 +2229,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_2_a.svg){fig-align="center"}
 
@@ -2236,7 +2237,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events|>
@@ -2272,7 +2273,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_2_b.svg){fig-align="center"}
 
@@ -2280,7 +2281,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events |>
@@ -2316,7 +2317,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_3_a.svg){fig-align="center"}
 
@@ -2324,7 +2325,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events|>
@@ -2360,7 +2361,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_3_b.svg){fig-align="center"}
 
@@ -2368,7 +2369,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events |>
@@ -2404,7 +2405,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_a.svg){fig-align="center"}
 
@@ -2412,7 +2413,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events|>
@@ -2448,7 +2449,7 @@ split_gt_nonevents |>
   )
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_b.svg){fig-align="center"}
 
@@ -2456,7 +2457,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events
@@ -2471,7 +2472,7 @@ split_gt_events
 split_gt_nonevents 
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_b.svg){fig-align="center"}
 
@@ -2495,8 +2496,7 @@ make_gt_auc_table(auc_data[1:4,])
 ```
 :::
 
-::: {.column width="33%"}
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: {.column width="33%"}
 ```{r}
 
 split_gt_events 
@@ -2504,7 +2504,7 @@ split_gt_events
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2541,7 +2541,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 ```{r}
 
@@ -2562,7 +2562,7 @@ expand.grid(c(rep("🤨", 5),rep( "🤢", 5) )) |>
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2599,7 +2599,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2607,7 +2607,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2644,7 +2644,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2652,7 +2652,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2689,7 +2689,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2697,7 +2697,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2734,7 +2734,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2742,7 +2742,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2779,7 +2779,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2787,7 +2787,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2824,7 +2824,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2832,7 +2832,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2869,7 +2869,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2877,7 +2877,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2914,7 +2914,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
 
@@ -2922,7 +2922,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\tex
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -2959,13 +2959,13 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 +}}{\text{5 + 5 + 5 +}}}\end{aligned}$
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -3002,13 +3002,13 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 + 5 +}}{\text{5 + 5 + 5 + 5 +}}}\end{aligned}$
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -3045,13 +3045,13 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 + 5 + 5 }}{\text{5 + 5 + 5 + 5 + 5}}}\end{aligned}$
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_nonevents |>
@@ -3088,7 +3088,7 @@ split_gt_events |>
   )
 ```
 :::
-:::
+::::::
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{23 }}{\text{25}} = 0.92}\end{aligned}$
 
@@ -3310,7 +3310,7 @@ The Target Population is well defined.
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events
@@ -3325,7 +3325,7 @@ split_gt_events
 split_gt_nonevents 
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_b.svg){fig-align="center"}
 
@@ -3333,7 +3333,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events
@@ -3348,7 +3348,7 @@ split_gt_events
 split_gt_nonevents 
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_b_with_age.svg){fig-align="center"}
 
@@ -3356,7 +3356,7 @@ $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0
 
 ------------------------------------------------------------------------
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 ```{r}
 split_gt_events
@@ -3371,7 +3371,7 @@ split_gt_events
 split_gt_nonevents 
 ```
 :::
-:::
+::::::
 
 ![](cindex_binary_4_b_with_age_better_target_population.svg){fig-align="center"}
 
@@ -3482,3 +3482,4 @@ create_gains_curve(
     fig_bgcolor   = "rgba(0, 0, 0, 0)"
     )
 ```
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -1,0 +1,4 @@
+- source: discrimination.qmd
+  netlify:
+    - id: 763ffd68-8a32-4e8d-85bf-04487812d417
+      url: https://predictionperformancediscrimination.netlify.app
