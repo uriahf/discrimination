@@ -1,0 +1,3484 @@
+---
+title: "discrimination"
+format:
+  revealjs:
+    incremental: true
+preload-iframes: true
+---
+
+# Discrimination 🖖 {background-iframe="emojis/index.html"}
+
+## Discrimination 🖖
+
+This is the most known and used category of performance metrics and curves.
+
+## [True Positives]{style="color: green;"} {.smaller}
+
+### Infected and Predicted as Infected - [Good]{style="color: green;"}
+
+[**💊**]{style="font-size: 50px;"} <br> [🤢]{style="font-size: 50px;"}
+
+```{r}
+
+library(magrittr)
+library(rtichoke)
+
+tibble::tribble(
+  ~"type", ~"predicted_positive", ~"predicted_negative",
+  "Real Positive", "TP", "FN",
+  "Real Negative", "FP", "TN"
+) |> 
+  reactable::reactable(
+    theme = reactable::reactableTheme(
+      backgroundColor = "#fdf6e3"
+    ),
+    sortable = FALSE,
+            fullWidth = FALSE,
+            borderless = FALSE,
+            defaultColDef = reactable::colDef(
+              align = "center",
+              headerStyle  = list(fontWeight = 100)
+            ),
+            columns = list(
+              type = reactable::colDef(
+                name = "",
+                align = "left",
+                style = list(fontWeight = 100),
+                minWidth = 200
+              ),
+              predicted_positive = reactable::colDef(
+                name = "Predicted Positive",
+                style = function(value) {
+                  color <- if (value == "TP") {
+                    "lightgreen"
+                  }
+                  
+                  list(fontWeight = 600, background = color)
+                },
+                minWidth = 200
+            ),
+            predicted_negative = reactable::colDef(
+              name = "Predicted Negative",
+              style = function(value) {
+                list(fontWeight = 600)
+              },
+                minWidth = 200
+            )
+            )
+  )
+```
+
+## [False Positives]{style="color: red;"} {.smaller}
+
+### Not-Infected and Predicted as Infected - [BAD]{style="color: red;"}
+
+[**💊**]{style="font-size: 50px;"} <br> [🤨]{style="font-size: 50px;"}
+
+```{r}
+ 
+tibble::tribble(
+  ~"type", ~"predicted_positive", ~"predicted_negative",
+  "Real Positive", "TP", "FN",
+  "Real Negative", "FP", "TN"
+) |> 
+  reactable::reactable(
+    theme = reactable::reactableTheme(
+      backgroundColor = "#fdf6e3"
+    ),
+    sortable = FALSE,
+            fullWidth = FALSE,
+            borderless = FALSE,
+            defaultColDef = reactable::colDef(
+              align = "center",
+              headerStyle  = list(fontWeight = 100)
+            ),
+            columns = list(
+              type = reactable::colDef(
+                name = "",
+                align = "left",
+                style = list(fontWeight = 100),
+                minWidth = 200
+              ),
+              predicted_positive = reactable::colDef(
+                name = "Predicted Positive",
+                style = function(value) {
+                  color <- if (value == "FP") {
+                    "pink"
+                  }
+                  
+                  list(fontWeight = 600, background = color)
+                },
+                minWidth = 200
+            ),
+            predicted_negative = reactable::colDef(
+              name = "Predicted Negative",
+              style = function(value) {
+                list(fontWeight = 600)
+              },
+                minWidth = 200
+            )
+            )
+  )
+```
+
+## [False Negatives]{style="color: red;"} {.smaller}
+
+### Infected and Predicted as Not-Infected - [BAD]{style="color: red;"}
+
+<br> [🤢]{style="font-size: 50px;"}
+
+```{r}
+ 
+tibble::tribble(
+  ~"type", ~"predicted_positive", ~"predicted_negative",
+  "Real Positive", "TP", "FN",
+  "Real Negative", "FP", "TN"
+) |> 
+  reactable::reactable(
+    theme = reactable::reactableTheme(
+      backgroundColor = "#fdf6e3"
+    ),
+    sortable = FALSE,
+            fullWidth = FALSE,
+            borderless = FALSE,
+            defaultColDef = reactable::colDef(
+              align = "center",
+              headerStyle  = list(fontWeight = 100)
+            ),
+            columns = list(
+              type = reactable::colDef(
+                name = "",
+                align = "left",
+                style = list(fontWeight = 100),
+                minWidth = 200
+              ),
+              predicted_positive = reactable::colDef(
+                name = "Predicted Positive",
+                style = function(value) {
+                  list(fontWeight = 600)
+                },
+                minWidth = 200
+            ),
+            predicted_negative = reactable::colDef(
+              name = "Predicted Negative",
+              style = function(value) {
+                 color <- if (value == "FN") {
+                  "pink"
+                 }
+                list(fontWeight = 600, background = color)
+              },
+                minWidth = 200
+            )
+            )
+  )
+```
+
+## [True Negatives]{style="color: green;"} {.smaller}
+
+### Not-Infected and Predicted as Not-Infected - [BAD]{style="color: green;"}
+
+<br> [🤨]{style="font-size: 50px;"}
+
+```{r}
+ 
+tibble::tribble(
+  ~"type", ~"predicted_positive", ~"predicted_negative",
+  "Real Positive", "TP", "FN",
+  "Real Negative", "FP", "TN"
+) |> 
+  reactable::reactable(
+    theme = reactable::reactableTheme(
+      backgroundColor = "#fdf6e3"
+    ),
+    sortable = FALSE,
+            fullWidth = FALSE,
+            borderless = FALSE,
+            defaultColDef = reactable::colDef(
+              align = "center",
+              headerStyle  = list(fontWeight = 100)
+            ),
+            columns = list(
+              type = reactable::colDef(
+                name = "",
+                align = "left",
+                style = list(fontWeight = 100),
+                minWidth = 200
+              ),
+              predicted_positive = reactable::colDef(
+                name = "Predicted Positive",
+                style = function(value) {
+                  list(fontWeight = 600)
+                },
+                minWidth = 200
+            ),
+            predicted_negative = reactable::colDef(
+              name = "Predicted Negative",
+              style = function(value) {
+                 color <- if (value == "TN") {
+                  "lightgreen"
+                 }
+                list(fontWeight = 600, background = color)
+              },
+                minWidth = 200
+            )
+            )
+  )
+```
+
+------------------------------------------------------------------------
+
+## Probability Threshold:
+
+-   Most Performance Metrics are estimated by using a Probability Threshold in order to classify each probability to Predicted Negative (Do not Treat) or Predicted Positive (Treat 💊).\
+
+-   This type of dichotomization is being used when the intervention carries a **potential risk** and there is a trade-off of risks between the intervention and the outcome.
+
+## Probability Threshold:
+
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+</tbody>
+</table>
+
+## Low Probability Threshold:
+
+Low Probability Threshold means that I'm worried about the **outcome**:
+
+-   I'm worried about **Prostate Cancer** 🦀
+-   I'm worried about **Heart Disease** 💔
+-   I'm worried about **Infection** 🤢
+
+## Probability Threshold of 0.25
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p><strong>p̂</strong></p></th>
+<th style="text-align: center;"><p>0.3</p></th>
+<th style="text-align: center;"><p>0.6</p></th>
+<th style="text-align: center;"><p>0.4</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+<th style="text-align: center;"><p>0.4</p></th>
+<th style="text-align: center;"><p>0.7</p></th>
+<th style="text-align: center;"><p>0.3</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+<th style="text-align: center;"><p>0.2</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+</tr>
+</tbody>
+</table>
+
+## High Probability Threshold:
+
+High Probability Threshold means that I'm worried about the **Intervention**:
+
+-   I'm worried about **Biopsy** 💉
+
+-   I'm worried about **Statins** 💊
+
+-   I'm worried about **Antibiotics** 💊
+
+## Probability Threshold of 0.55
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p><strong>p̂</strong></p></th>
+<th style="text-align: center;"><p>0.3</p></th>
+<th style="text-align: center;"><p>0.6</p></th>
+<th style="text-align: center;"><p>0.4</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+<th style="text-align: center;"><p>0.4</p></th>
+<th style="text-align: center;"><p>0.7</p></th>
+<th style="text-align: center;"><p>0.3</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+<th style="text-align: center;"><p>0.2</p></th>
+<th style="text-align: center;"><p>0.1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+</tr>
+</tbody>
+</table>
+
+## PPCR (Predicted Positives Conditional Rate):
+
+$\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}\end{aligned} = \begin{aligned} \ {\scriptsize \frac{\text{Predicted Positives}}{\text{Total Population}}}\end{aligned}$
+
+-   Sometimes we will classify each observation according to the ranking of the risk in order to prioritize high-risk patients regardless their absolute risk.
+
+-   The implied assumption is that the highest risk might gain the highest benefit from the treatment and that the treatment does not carry a significant potential risk.
+
+-   This type of dichotomization is being used when the organization face **Resource Constraint**. In healthcare we call it also **Risk Percentile**.
+
+## PPCR of 0.1
+
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>R</strong></p></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+
+## PPCR of 0.1
+
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>R</strong></p></td>
+<td style="text-align: center;"><p>5.5</p></td>
+<td style="text-align: center;"><p>2</p></td>
+<td style="text-align: center;"><p>3.5</p></td>
+<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>3.5</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>5.5</p></td>
+<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>7</p></td>
+<td style="text-align: center;"><p>9</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span> <br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+</tr>
+</tbody>
+</table>
+
+## 
+
+![](line%20of%20patients/line%20-%20Copy%20-%20Copy%2001.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+performance_data_example <- prepare_performance_data(
+  probs = list(
+    c(0.72, 0.63, 0.47, 0.45, 0.33, 0.31, 0.29, 0.18, 0.15, 0.11)
+  ),
+  reals = list(
+    c(1, 1, 0, 1, 0, 1, 0, 0, 0, 0)
+  ),
+  by = 0.1, stratified_by = "ppcr"
+)
+
+bar_chart_new <- function(value, display, color = "red"){
+  
+  display_metric <- glue::glue("{display} <br> ({round(display / 10, digits = 1)}%)")
+  
+  glue::glue("<span style=\"display: inline-block;direction: ltr;
+             border-radius: 4px; padding-right: 2px;
+             background-color: {color}; color: black;
+             width: {value}%\">{display_metric}</span>") %>% 
+    as.character() %>% 
+    gt::html()
+}
+
+add_color_to_confusion_metric_new <- function(performance_dat, metric, color) {
+  performance_dat %>%
+    dplyr::mutate(metric_plot = 100 * {{ metric }} / 10, metric_plot = purrr::map2(metric_plot, {{ metric }}, .f = ~ bar_chart_new(
+      value = .x, display = .y, color = color
+    ))) %>%
+    dplyr::mutate(`:=`({{ metric }}, .data$metric_plot)) %>%
+    dplyr::select(-.data$metric_plot)
+}
+
+list_per_ppcr <- performance_data_example %>%
+  split(., .$ppcr)
+
+
+confusion_matrix_list <- performance_data_example |>
+  dplyr::mutate(n_obs = 10,
+                predicted_negatives = TN + FN,
+                predicted_positives = TP + FP,
+                real_negatives = TN + FP,
+                real_positives = TP + FN) |> 
+  add_color_to_confusion_metric_new(predicted_negatives, "lightgray")|> 
+  add_color_to_confusion_metric_new(real_negatives, "lightgray")|> 
+  add_color_to_confusion_metric_new(real_positives, "lightgray")|> 
+  add_color_to_confusion_metric_new(TP, "lightgreen") %>% 
+  add_color_to_confusion_metric_new(TN, "lightgreen") %>% 
+  add_color_to_confusion_metric_new(FP, "pink") %>% 
+  add_color_to_confusion_metric_new(FN, "pink") |> 
+  add_color_to_confusion_metric_new(n_obs, "lightgray")|>
+  add_color_to_confusion_metric_new(predicted_positives, "lightgray")|> 
+  dplyr::select(ppcr, TP, TN, FP, FN, 
+                predicted_positives, 
+                real_negatives,
+                real_positives,
+                predicted_negatives,
+                n_obs) 
+
+turn_performance_data_to_confusion_matrix_gt <- function(performance_data_gt) {
+  
+  tibble::tibble(
+    reals = c("**Real<br>Positives** ", "**Real<br>Negatives**", ""),
+    predicted_positives = c(
+      performance_data_gt$TP,
+      performance_data_gt$FP,
+      performance_data_gt$predicted_positives), 
+    predicted_negatives = c(
+      performance_data_gt$FN,
+      performance_data_gt$TN, 
+      performance_data_gt$predicted_negatives
+    ),
+    margin = c(
+      performance_data_gt$real_positives, 
+      performance_data_gt$real_negatives, 
+      performance_data_gt$n_obs
+    )) |> 
+    gt::gt(rowname_col = "reals") |> 
+    gt::cols_label(
+      margin = "",
+      predicted_positives = gt::md("**Predicted<br>Positives**"),
+      predicted_negatives = gt::md("**Predicted<br>Negatives**")
+    ) |>
+   gt::fmt_markdown(columns = reals) %>%
+    gt::cols_width(
+      gt::everything() ~ px(100)
+    )
+    
+  
+}
+
+
+
+confusion_matrix_list[2,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+library(rtichoke)
+
+create_rtichoke_curve_by_frame <- function(performance_data, curve, frame) {
+  
+  example_curve_list <- rtichoke:::create_rtichoke_curve_list(
+    performance_data, 
+    curve, 
+    size = 300)
+  
+  size_height <- example_curve_list$size[[1]] 
+  
+  interactive_marker <- list(
+    size = 12, 
+    line = list(width = 3, color = I("black")))
+  
+  interactive_marker$color <- "#f6e3be"
+  
+  plotly::config(plotly::layout(
+    plotly::add_markers(
+      plotly::add_trace(
+        plotly::add_lines(
+          plotly::plot_ly(
+            x = ~x,
+            y = ~y, height = size_height, width = example_curve_list$size[[1]],
+            hoverinfo = "text", text = ~text, color = ~reference_group,
+            colors = unlist(example_curve_list$group_colors_vec)
+          ),
+          data = example_curve_list$reference_data, line = list(dash = "dot")
+        ),
+        data = example_curve_list$performance_data_ready_for_curve,
+        type = "scatter", mode = "lines+markers", line = list(dash = "solid")
+      ),
+      data = example_curve_list$performance_data_for_interactive_marker[frame,],
+      marker = interactive_marker
+    ),
+    xaxis = list(
+      showgrid = FALSE, fixedrange = TRUE, range = example_curve_list$axes_ranges$xaxis,
+      title = example_curve_list$axes_labels$xaxis
+    ),
+    yaxis = list(
+      showgrid = FALSE, fixedrange = TRUE, range = example_curve_list$axes_ranges$yaxis,
+      title = example_curve_list$axes_labels$yaxis
+    ),
+    showlegend = FALSE, plot_bgcolor = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)"
+  ),
+  displayModeBar = FALSE
+  )  
+}
+
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 1)
+
+```
+:::
+:::
+
+## Prevalence
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+tibble::tibble(
+    reals = c("**Real<br>Positives** ", "**Real<br>Negatives**", ""),
+    predicted_positives = c(
+      " ",
+      " ",
+      " "), 
+    predicted_negatives = c(
+      " ",
+      " ", 
+      " "
+    ),
+    margin = c(
+      confusion_matrix_list[2,]$real_positives, 
+      confusion_matrix_list[2,]$real_negatives, 
+      confusion_matrix_list[2,]$n_obs
+    )) |> 
+    gt::gt(rowname_col = "reals") |> 
+    gt::cols_label(
+      margin = "",
+      predicted_positives = gt::md("**Predicted<br>Positives**"),
+      predicted_negatives = gt::md("**Predicted<br>Negatives**")
+    ) |>
+   gt::fmt_markdown(columns = reals) %>%
+    gt::cols_width(
+      gt::everything() ~ px(100)
+    ) |>
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html() 
+
+
+```
+:::
+
+::: {.column width="50%"}
+$$\frac{\sum \text{Real-Positives}}{\sum \text{Observations}} = \frac{4}{10}$$
+:::
+:::
+
+```{r}
+
+
+tibble::tibble(
+  y = c(1, 1, 0, 1, 0, 1, 0, 0, 0, 0)
+) |> 
+  dplyr::mutate(
+    emoji = ifelse( y == 1, "🤢", "🤨")
+  ) |> 
+  t() |>
+  tibble::as_tibble() |> 
+  gt::gt() |> 
+  gt::tab_options(column_labels.hidden = TRUE) |> 
+  gt::cols_width(
+      gt::everything() ~ px(90)
+    ) |>
+  gt::tab_options(
+    table.font.size = gt::px(50)
+  ) |>
+  gt::cols_align(align = "center", columns = dplyr::everything()) |> 
+  gt::tab_style(
+    style = list(
+      "opacity: .2;"
+    ),
+    locations = gt::cells_body(columns = -c(V1, V2, V4, V6))
+  )
+
+
+```
+
+## PPCR
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+tibble::tibble(
+    reals = c("**Real<br>Positives** ", "**Real<br>Negatives**", ""),
+    predicted_positives = c(
+      " ",
+      " ",
+      confusion_matrix_list[4,]$predicted_positives), 
+    predicted_negatives = c(
+      " ",
+      " ", 
+      confusion_matrix_list[4,]$predicted_negatives
+    ),
+    margin = c(
+      " ",
+      " ",
+      confusion_matrix_list[4,]$n_obs
+    )) |> 
+    gt::gt(rowname_col = "reals") |> 
+    gt::cols_label(
+      margin = "",
+      predicted_positives = gt::md("**Predicted<br>Positives**"),
+      predicted_negatives = gt::md("**Predicted<br>Negatives**")
+    ) |>
+   gt::fmt_markdown(columns = reals) %>%
+    gt::cols_width(
+      gt::everything() ~ px(100)
+    ) |>
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html() 
+
+
+```
+:::
+
+::: {.column width="50%"}
+$$\frac{\sum \text{Predicted-Positives}}{\sum \text{Observations}} = \frac{3}{10}$$
+:::
+:::
+
+```{r}
+
+
+tibble::tibble(
+  y_hat = c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0)
+) |> 
+  dplyr::mutate(
+    emoji_trt = ifelse( y_hat == 1, "💊", " " ),
+    emoji = "😷"
+  ) |> 
+  t() |>
+  tibble::as_tibble() |> 
+  gt::gt() |> 
+  gt::tab_options(column_labels.hidden = TRUE) |> 
+  gt::cols_width(
+      gt::everything() ~ px(90)
+    ) |>
+  gt::tab_options(
+    table.font.size = gt::px(50)
+  ) |>
+  gt::cols_align(align = "center", columns = dplyr::everything()) |> 
+  gt::tab_style(
+    style = list(
+      "opacity: .2;"
+    ),
+    locations = gt::cells_body(columns = -c(V1, V2, V3))
+  )
+
+
+```
+
+## 
+
+![](line%20of%20patients/line_ppcr_0.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[1,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 1)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_01.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[2,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 2)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_02.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[3,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# library(rtichoke)
+# 
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 3)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_03.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[4,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# library(rtichoke)
+# 
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 4)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_04.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[5,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# library(rtichoke)
+# 
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 5)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_05.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[6,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# library(rtichoke)
+# 
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 6)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_06.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+
+confusion_matrix_list[7,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# library(rtichoke)
+# 
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 7)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_07.svg)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+# N <- 10
+# 
+# structure(list(4L, 0L, 4L, 3L, 3L, 6L, 7L, 3L, 10L), dim = c(
+#   3L,
+#   3L
+# ), dimnames = list(c(
+#   "Predicted Positive", "Predicted Negative",
+#   " "
+# ), c("Real Positive", "Real Negative", " "))) |> 
+#   tibble::as_tibble(rownames = "roname") |> 
+#   gt::gt(rowname_col = "roname")|>
+#   gt::as_raw_html()
+
+confusion_matrix_list[8,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 8)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_08.svg)
+
+::: columns
+::: {.column width="50%"}
+<!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{PPV} = \frac{\text{True-Positives}}{\text{Predicted-Positives}} = \frac{\text{1}}{\text{4}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Prevalence} = \frac{\text{Real-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Lift} = \frac{\text{PPV}}{\text{Prevalence}} = \frac{\frac{1}{4}}{\frac{3}{10}} = \frac{3}{40}}\end{aligned}$ -->
+
+```{r}
+N <- 10
+
+# structure(list(4L, 0L, 4L, 4L, 2L, 6L, 8L, 2L, 10L), dim = c(
+#   3L,
+#   3L
+# ), dimnames = list(c(
+#   "Predicted Positive", "Predicted Negative",
+#   " "
+# ), c("Real Positive", "Real Negative", " "))) |> 
+#   tibble::as_tibble(rownames = "roname") |> 
+#   gt::gt(rowname_col = "roname")|>
+#   gt::as_raw_html()
+
+confusion_matrix_list[9,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 9)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_09.svg)
+
+::: columns
+::: {.column width="50%"}
+<!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{PPV} = \frac{\text{True-Positives}}{\text{Predicted-Positives}} = \frac{\text{1}}{\text{4}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Prevalence} = \frac{\text{Real-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Lift} = \frac{\text{PPV}}{\text{Prevalence}} = \frac{\frac{1}{4}}{\frac{3}{10}} = \frac{3}{40}}\end{aligned}$ -->
+
+```{r}
+confusion_matrix_list[10,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 10)
+```
+:::
+:::
+
+## 
+
+![](line%20of%20patients/line_ppcr_1.svg)
+
+::: columns
+::: {.column width="50%"}
+<!-- $\begin{aligned} \ {\scriptsize \text{PPCR} = \frac{\text{Predicted-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{PPV} = \frac{\text{True-Positives}}{\text{Predicted-Positives}} = \frac{\text{1}}{\text{4}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Prevalence} = \frac{\text{Real-Positives}}{\text{N}} = \frac{\text{3}}{\text{10}}}\end{aligned}$ -->
+
+<!-- $\begin{aligned} \ {\scriptsize \text{Lift} = \frac{\text{PPV}}{\text{Prevalence}} = \frac{\frac{1}{4}}{\frac{3}{10}} = \frac{3}{40}}\end{aligned}$ -->
+
+```{r}
+# N <- 10
+# 
+# structure(list(4L, 0L, 4L, 6L, 0L, 6L, 10L, 0L, 10L), dim = c(
+#   3L,
+#   3L
+# ), dimnames = list(c(
+#   "Predicted Positive", "Predicted Negative",
+#   " "
+# ), c("Real Positive", "Real Negative", " "))) |> 
+#   tibble::as_tibble(rownames = "roname") |> 
+#   gt::gt(rowname_col = "roname")|>
+#   gt::as_raw_html()
+
+confusion_matrix_list[11,] |>
+  turn_performance_data_to_confusion_matrix_gt() |> 
+  gt::cols_align(align = "left", columns = dplyr::everything()) |>
+  gt::as_raw_html()
+
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+create_rtichoke_curve_by_frame(
+  performance_data_example, "lift", 11)
+```
+:::
+:::
+
+## 
+
+## PPCR of 0.1
+
+![](line%20of%20patients/line_ppcr_01_before.svg)
+
+## PPCR of 0.1
+
+![](line%20of%20patients/line_ppcr_01_before.svg)
+
+::: columns
+::: {.column width="70%"}
+![](line%20of%20patients/line_ppcr_01_before.svg)
+
+```{r}
+
+tibble::tribble(
+  ~"type", ~"predicted_positive", ~"predicted_negative",
+  "Real Positive", "TP", "FN",
+  "Real Negative", "FP", "TN"
+) |> 
+  reactable::reactable(
+    theme = reactable::reactableTheme(
+      backgroundColor = "#fdf6e3"
+    ),
+    sortable = FALSE,
+            fullWidth = FALSE,
+            borderless = FALSE,
+            defaultColDef = reactable::colDef(
+              align = "center",
+              headerStyle  = list(fontWeight = 100)
+            ),
+            columns = list(
+              type = reactable::colDef(
+                name = "",
+                align = "left",
+                style = list(fontWeight = 100),
+                minWidth = 200
+              ),
+              predicted_positive = reactable::colDef(
+                name = "Predicted Positive",
+                style = function(value) {
+                  color <- if (value == "TP") {
+                    "lightgreen"
+                  }
+                  
+                  list(fontWeight = 600, background = color)
+                },
+                minWidth = 200
+            ),
+            predicted_negative = reactable::colDef(
+              name = "Predicted Negative",
+              style = function(value) {
+                list(fontWeight = 600)
+              },
+                minWidth = 200
+            )
+            )
+  )
+```
+:::
+
+::: {.column width="30%"}
+```{r}
+library(rtichoke)
+
+prepare_performance_data(
+    probs = list(example_dat$estimated_probabilities),
+    reals = list(example_dat$outcome),
+    stratified_by = "ppcr", 
+    by = 0.1
+) |> 
+    plot_lift_curve(size = 300)
+```
+:::
+:::
+
+## 
+
+::: columns
+::: {.column width="50%"}
+### Healthcare
+
+![](counterfactual_decision_medical.svg)
+
+The event of disease 🤢 is [negative]{style="background-color: pink;"}
+:::
+
+::: {.column width="50%"}
+### Telemarketing
+
+![](counterfactual_decision_telemarketing.svg)
+
+The event of purchase 💳 is [positive]{style="background-color: lightgreen;"}
+:::
+:::
+
+## 
+
+::: columns
+::: {.column width="50%"}
+### Healthcare
+
+![](healthcare_treatment_worked.svg)
+
+Best Strategy: Treat! 💊
+
+We can save the patient 🙏
+:::
+
+::: {.column width="50%"}
+### Telemarketing
+
+![](telemarketing_sleeping_dogs.svg)
+
+Best Strategy: Don't Treat!
+
+Don't wake up a sleeping dog 🐶
+:::
+:::
+
+## 
+
+::: columns
+::: {.column width="50%"}
+### Healthcare
+
+![](healthcare_lost_cause.svg)
+
+Best Strategy: Don't Treat!
+
+Treatment will not prevent the disease 😔
+:::
+
+::: {.column width="50%"}
+### Telemarketing
+
+![](telemarketing_sure_things.svg)
+
+Best Strategy: Don't Treat!
+
+Purchase anyway 🤗
+:::
+:::
+
+## 
+
+::: columns
+::: {.column width="50%"}
+### Healthcare
+
+![](healthcare_nonevent_regardless.svg)
+
+Best Strategy: Don't Treat!
+
+No disease whatsoever 🙄
+:::
+
+::: {.column width="50%"}
+### Telemarketing
+
+![](telemarketing_lost_causes.svg)
+
+Best Strategy: Don't Treat!
+
+No purchase anyway 😒
+:::
+:::
+
+## 
+
+::: columns
+::: {.column width="50%"}
+### Healthcare
+
+![](healthcare_treatment_caused_event.svg)
+
+Best Strategy: Don't Treat!
+
+Treatment caused the event 😨
+:::
+
+::: {.column width="50%"}
+### Telemarketing
+
+![](telemarketing_persuadables.svg)
+
+Best Strategy: Treat! 📞
+
+Will buy if engaged 🤔
+:::
+:::
+
+## PPCR of 0.1
+
+![](line%20of%20patients/line_ppcr_01_before.svg)
+
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>R</strong></p></td>
+<td style="text-align: center;"><p>5.5</p></td>
+<td style="text-align: center;"><p>2</p></td>
+<td style="text-align: center;"><p>3.5</p></td>
+<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>3.5</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>5.5</p></td>
+<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>7</p></td>
+<td style="text-align: center;"><p>9</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span> <br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+</tr>
+</tbody>
+</table>
+
+## PPCR of 0.1
+
+::: columns
+::: {.column width="60%"}
+![](line%20of%20patients/line_ppcr_01_before.svg)
+:::
+
+::: {.column width="40%"}
+:::
+:::
+
+## PPCR of 0.1
+
+![](line%20of%20patients/line_ppcr_01_after.svg)
+
+## PPCR of 1
+
+![](line%20of%20patients/line_ppcr_1_before.svg)
+
+## Discrimination - Performance Curves
+
+| Curve             | Sens | Spec | PPV | PPCR | Lift |
+|:------------------|:----:|:----:|:---:|:----:|:----:|
+| ROC               |  y   |  x   |     |      |      |
+| Lift              |      |      |     |  x   |  y   |
+| Precision- Recall |  x   |      |  y  |      |      |
+| Gains             |  y   |      |     |  x   |      |
+
+## ROC Curve
+
+| Curve             | Sens  | Spec  | PPV | PPCR | Lift |
+|:------------------|:-----:|:-----:|:---:|:----:|:----:|
+| **ROC**           | **y** | **x** |     |      |      |
+| Lift              |       |       |     |  x   |  y   |
+| Precision- Recall |   x   |       |  y  |      |      |
+| Gains             |   y   |       |     |  x   |      |
+
+## ROC Curve
+
+-   The most famous form of Performance Metrics Visualization
+
+-   Displays Sensitivity (also known as True Positive Rate or Percision) on the y axis
+
+-   Displays 1 - Specificity (also known as False Positive Rate) on the x axis.
+
+## ROC Curve
+
+```{r}
+library(rtichoke)
+
+create_roc_curve(
+  size = 500,
+  probs = list(example_dat$estimated_probabilities),
+  reals = list(example_dat$outcome)
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
+
+## Why I don't like ROC Curve 😤 {.smaller}
+
+### Why 1 - Specificity? Why not just Specificity? 🙃
+
+::: columns
+::: {.column width="40%"}
+Honestly, I didn't find anywhere why *1 - Specificity* is more insightful than just *Specificity.*
+:::
+
+::: {.column width="60%"}
+```{r}
+library(rtichoke)
+
+create_roc_curve(
+  size = 500,
+  probs = list(example_dat$estimated_probabilities),
+  reals = list(example_dat$outcome)
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
+:::
+:::
+
+## Why I don't like ROC Curve 😤 {.smaller}
+
+### Why 1 - Specificity? Why not just Specificity? 🙃
+
+::: columns
+::: {.column width="40%"}
+Honestly, I didn't find anywhere why *1 - Specificity* is more insightful than just *Specificity.*
+:::
+
+::: {.column width="60%"}
+```{r}
+library(rtichoke)
+
+perf_dat <- one_pop_one_model %>% 
+  rtichoke:::add_hover_text_to_performance_data(
+    "one population", 
+    curve = "roc", 
+    stratified_by = "probability threshold")
+
+plotly::plot_ly(
+  x = ~specificity, 
+  y = ~sensitivity, 
+  height = 550,
+  width = 500
+  ) |>  
+  plotly::add_trace(
+    data = perf_dat,
+    type = "scatter",
+    mode = "markers+lines", 
+    color = I("black"), 
+    hoverinfo = "text",
+    text = ~text) |> 
+  plotly::add_markers(
+    frame = ~probability_threshold, 
+    marker = list(
+      size = 12, 
+      line = list(width = 3, color = I("black")), 
+      color = "#f6e3be"), 
+    hoverinfo = "text", 
+    text = ~text
+  ) |> 
+  rtichoke:::remove_grid_lines_from_plotly() |>
+  plotly::layout(
+    xaxis = list(
+      title = "Specificity", fixedrange = TRUE), 
+    yaxis = list(title = "Sensitivity",fixedrange = TRUE), 
+    showlegend = FALSE) |> 
+  plotly::config(displayModeBar = FALSE)|> 
+  plotly::animation_slider(
+    currentvalue = list(
+      prefix = "Prob. Threshold: ",
+      font = list(color = "black"),
+      xanchor = "left"), 
+    pad = list(t = 50)) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
+:::
+:::
+
+## Why I don't like ROC Curve 😤
+
+### Sensitivity and Specificity do not respect the flow of time 🕰️
+
+![](real_positives_future.jpg)
+
+## Why I don't like ROC Curve 😤
+
+### Sensitivity and Specificity do not respect the flow of time 🕰️ {.smaller}
+
+<br>
+
+Sensitivity: $\begin{aligned} \ {\scriptsize \frac{\text{TP}}{\text{TP + FN}} = \text{Prob( Predicted Positive | Real Positive )}}\end{aligned}$
+
+<br>
+
+Specificity: $\begin{aligned} \ {\scriptsize \frac{\text{TN}}{\text{TN + FP}} = \text{Prob( Predicted Negative | Real Negative )} } \end{aligned}$
+
+<br>
+
+We do not know the condition of the Conditional Probability: Not the number of future Real Positives nor the number of future Real Negatives.
+
+## Why I don't like ROC Curve 😤
+
+### Sensitivity and Specificity do not respect the flow of time 🕰️ {.smaller}
+
+<br>
+
+PPV: $\begin{aligned} \ {\scriptsize \frac{\text{TP}}{\text{TP + FP}} = \text{Prob( Real Positive | Predicted Positive )}}\end{aligned}$
+
+<br>
+
+NPV: $\begin{aligned} \ {\scriptsize \frac{\text{TN}}{\text{TN + FN}} = \text{Prob( Real Negative | Predicted Negative )} } \end{aligned}$
+
+We know the condition of the Conditional Probability: The number of Predicted Positives and the number of Predicted Negatives.
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+-   Generally speaking more area under a curve with two "Good" performance metrics means better model. Other than that, there is no context and performance metrics with no context might lead to ambiguity and bad decisions.
+
+-   Another Curve: Precision-Recall is made of Sensitivity (Precision) and PPV (Recall). How much PRAUC is enough?
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+-   Why not calculating GAINSAUC? Or any combination of two good performance metrics? We can get with Sensitivity, Specificity, NPV, PPV 6 AUC metrics. Do they provide any meaningful insight besides a vague *the more the better*?
+
+## What is the AUROC of the following Models?
+
+```{r}
+set.seed(123)
+library(rtichoke)
+library(ggplot2)
+
+second_model_probs <- c(
+  example_dat$estimated_probabilities[1:100],
+  sample(example_dat$estimated_probabilities, size = 50)
+)
+
+create_roc_curve(
+  probs = list(
+    "First Model" = example_dat$estimated_probabilities,
+    "Second Model" = second_model_probs
+  ),
+  reals = list(example_dat$outcome),
+  size = 500,
+  interactive = TRUE
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+
+```
+
+## What is the AUROC of the following Models?
+
+![](khaby.gif)
+
+```{r}
+library(reactable)
+
+options(reactable.theme = reactableTheme(
+  backgroundColor = "#fdf6e3"
+))
+
+rtichoke:::create_table_for_auc(
+  probs = list(
+    "First Model" = example_dat$estimated_probabilities,
+    "Second Model" = second_model_probs
+  ),
+  reals = list(example_dat$outcome)
+)
+```
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+-   High Ink-to-information ratio 😵
+
+-   One might suggest that the visual aspect is useful, but as human beings we are really bad at interpreting round things (That's why pie-charts are considered to be bad practice).
+
+<!-- -->
+
+-   Yet, the AUROC is valuable because of the equivalence to the c-statistics and it might provide good intuition about the performance of the model.
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+-   If you'll take randomly one event and one non-event, the probability that the event will be estimated with higher probability is exactly the AUROC.
+
+-   AUROC = p( p̂(🤨) \< p̂(🤢) )
+
+------------------------------------------------------------------------
+
+```{r}
+probs <- c(0.72, 0.63, 0.47, 0.45, 0.33, 0.31, 0.29, 0.18, 0.15, 0.11)
+reals <- c(1, 1, 0, 1, 0, 1, 0, 0, 0, 0)
+
+library(gt)
+library(dplyr)
+library(tibble)
+library(glue)
+library(tidyr)
+
+original_data <-  tibble(
+  probs = probs,
+  reals = reals) %>%
+  mutate(" " =ifelse(reals == 1, "🤢", "🤨"))
+
+original_gt <- original_data  |>
+  gt::gt()  
+
+original_gt_sorted <- original_data |>
+  arrange(desc(probs)) |>
+  gt() |>
+  cols_label (
+    probs = md("**p̂**"),
+    reals ~ md("**Y**")
+  )
+
+split_data <- original_data |> 
+  split(reals)
+  
+split_gt_events  <- split_data$`1` |>
+  gt::gt() |>
+  cols_label (
+    probs = md("**p̂**"),
+    reals ~ md("**Y**")
+  )
+  
+split_gt_nonevents <- split_data$`0` |>
+  gt::gt() |>
+  cols_label (
+    probs = md("**p̂**"),
+    reals ~ md("**Y**")
+  )
+
+
+auc_data <- expand_grid(
+  split_data$`1` |> 
+    select(-reals) |> 
+    rename(
+      "probs_event" = "probs",
+      "emoji_event" = " "), 
+  split_data$`0`|> 
+    select(-reals) |> 
+    rename(
+      "probs_nonevent" = "probs",
+      "emoji_nonevent" = " ")
+) |> 
+  mutate(
+    bigger_equal = case_when(
+      probs_event > probs_nonevent ~ ">",
+      TRUE ~ "<"
+    ),
+    emoji_full = glue("{emoji_event} {bigger_equal} {emoji_nonevent}"),
+    emoji_not_full = glue("{emoji_event}   {emoji_nonevent}"),
+    discriminate = ifelse(
+      bigger_equal == ">",
+      "👍", "👎"
+  )) |> 
+  select(
+    probs_event, emoji_full, emoji_not_full, probs_nonevent, bigger_equal, discriminate
+  )
+
+make_gt_auc_table <- function(auc_data, 
+                              filled_with_checks = FALSE) {
+  
+  
+  if (filled_with_checks == FALSE) {
+    
+    auc_data_ready <- auc_data |> 
+      mutate(
+        emoji_selected = emoji_not_full,
+        discriminate = ""
+      ) 
+    
+  } else {
+    
+    auc_data_ready <- auc_data |> 
+      mutate(
+        emoji_selected = emoji_full
+      ) 
+  }
+  
+  auc_gt_table <- auc_data_ready |> 
+      select(
+        probs_event, emoji_selected, probs_nonevent,
+        bigger_equal, discriminate) |> 
+  gt::gt() |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+  
+  if (filled_with_checks == TRUE) {
+    
+    auc_gt_table <- auc_gt_table |>
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen")
+    ),
+    locations = cells_body(
+      columns = c(emoji_selected, discriminate),
+      rows = bigger_equal == ">"
+    )
+  ) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "pink")
+    ),
+    locations = cells_body(
+      columns = c(emoji_selected, discriminate),
+      rows = bigger_equal == "<"
+    )
+  )
+    
+  }
+  
+  auc_gt_table   |>
+  cols_hide(
+    columns = c(
+       bigger_equal)) |>
+  cols_label(
+    probs_event = md("**p̂**"),
+    probs_nonevent = md("**p̂**"),
+    emoji_selected ~ " ",
+    discriminate = "🖖"
+  )|> 
+    as_raw_html()
+  
+  
+}
+
+
+original_gt_sorted
+
+```
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="50%"}
+```{r}
+split_gt_events
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+split_gt_nonevents
+```
+:::
+:::
+
+![](cindex_binary_0.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 1
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[1:6,], filled_with_checks = FALSE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_1_a.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} }\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events|>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 1
+    )
+  ) 
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[1:6,], filled_with_checks = TRUE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_1_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 +}}{\text{6 + }}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6 + 1:6,], filled_with_checks = FALSE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_2_a.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + }}{\text{6 +  }}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6 + 1:6,], filled_with_checks = FALSE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_2_a.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + }}{\text{6 +  }}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events|>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  ) 
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6 + 1:6,], filled_with_checks = TRUE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_2_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + 6 +}}{\text{6 + 6 + }}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 3
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[12 + 1:6,], filled_with_checks = FALSE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_3_a.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + 6 +}}{\text{6 + 6 +}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events|>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 3
+    )
+  ) 
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[12 + 1:6,], filled_with_checks = TRUE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_3_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + 6 + 5 +}}{\text{6 + 6 + 6 +}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 4
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[18 + 1:6,], filled_with_checks = FALSE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_4_a.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + 6 + 5 +}}{\text{6 + 6 + 6 +}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events|>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 4
+    )
+  ) 
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[18 + 1:6,], filled_with_checks = TRUE)
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+![](cindex_binary_4_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{6 + 6 + 5 + 4}}{\text{6 + 6 + 6 + 6}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events
+```
+:::
+
+::: {.column width="34%"}
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents 
+```
+:::
+:::
+
+![](cindex_binary_4_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0.875}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns ::: {.column width="33%"}
+
+```{r}
+split_gt_nonevents 
+```
+
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[1:4,])
+
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+
+split_gt_events 
+```
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 1
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[1:5,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+```{r}
+
+
+expand.grid(c(rep("🤨", 5),rep( "🤢", 5) )) |>
+  gt() |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+
+<!-- $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 +}}{\text{5 + }}}\end{aligned}$ -->
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_1_a.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_1_b.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_2_a.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_2_b.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_3_a.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_3_b.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_4_a.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 2
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[6:10,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 +}}{\text{5 + 5 +}}}\end{aligned}$
+
+![](cindex_binary_4_b.svg)
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 3
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[11:15,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 +}}{\text{5 + 5 + 5 +}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 4
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[16:20,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 + 5 +}}{\text{5 + 5 + 5 + 5 +}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 5
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[21:25,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{4 + 5 + 4 + 5 + 5 }}{\text{5 + 5 + 5 + 5 + 5}}}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = 5
+    )
+  )
+```
+:::
+
+::: {.column width="34%"}
+```{r}
+
+make_gt_auc_table(auc_data[21:25,])
+
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+
+split_gt_events |>
+  tab_style(
+    style = list(
+      cell_fill(color = "cyan")
+    ),
+    locations = cells_body(
+      rows = everything()
+    )
+  )
+```
+:::
+:::
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{#Concordants}}{\text{#Concordants + #Noncorcodants}} = \frac{\text{23 }}{\text{25}} = 0.92}\end{aligned}$
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+```{r}
+#| echo: true
+probs <- c(0.3, 0.6, 0.4, 0.1, 0.4, 0.7, 0.3, 0.1, 0.2, 0.1)
+reals <- c(0, 1, 1, 0, 1, 1, 0, 0, 1, 0)
+
+pROC::auc(reals, probs)
+
+probs_events <- probs[reals == 1]
+probs_nonevents <- probs[reals == 0]
+
+prop.table(
+  table(
+    sample(probs_events, replace = TRUE, size = 10000) >
+    sample(probs_nonevents, replace = TRUE, size = 10000)
+  )
+)
+```
+
+## Why I don't like ROC Curve 😤
+
+### You don't care about AUROC, you care about the c-statistics
+
+```{python}
+#| echo: true
+import numpy as np
+import random
+
+probs = np.array([0.3, 0.6, 0.4, 0.1, 0.4, 0.7, 0.3, 0.1, 0.2, 0.1])
+reals = np.array([0, 1, 1, 0, 1, 1, 0, 0, 1, 0])
+
+probs_events = probs[reals == 1]
+probs_nonevents = probs[reals == 0]
+
+event_prob_greater_than_nonevent_prob = np.greater(
+  random.choices(sorted(probs_events), 
+  k = 10000),
+  random.choices(sorted(probs_nonevents), 
+  k = 10000)
+)
+
+unique_elements, counts_elements = np.unique(
+  event_prob_greater_than_nonevent_prob, return_counts=True)
+
+counts_elements / 10000
+
+```
+
+## Why I don't like ROC Curve 😤
+
+## Good AUROC does not necessarily mean a Good model
+
+AUROC shows how well your model discriminates between events and non-events given a target population.
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p>Age</p></th>
+<th style="text-align: center;"><p>64</p></th>
+<th style="text-align: center;"><p>86</p></th>
+<th style="text-align: center;"><p>56</p></th>
+<th style="text-align: center;"><p>7</p></th>
+<th style="text-align: center;"><p>78</p></th>
+<th style="text-align: center;"><p>85</p></th>
+<th style="text-align: center;"><p>6</p></th>
+<th style="text-align: center;"><p>12</p></th>
+<th style="text-align: center;"><p>67</p></th>
+<th style="text-align: center;"><p>73</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+</tbody>
+</table>
+
+## Good AUROC does not necessarily mean a Good model
+
+This model has AUROC = 0.92, but the number is misleading:\
+The Target Population is not well defined.
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p>Age</p></th>
+<th style="text-align: center;"><p>64</p></th>
+<th style="text-align: center;"><p>86</p></th>
+<th style="text-align: center;"><p>56</p></th>
+<th style="text-align: center;"><p>7</p></th>
+<th style="text-align: center;"><p>78</p></th>
+<th style="text-align: center;"><p>85</p></th>
+<th style="text-align: center;"><p>6</p></th>
+<th style="text-align: center;"><p>12</p></th>
+<th style="text-align: center;"><p>67</p></th>
+<th style="text-align: center;"><p>73</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.6</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.4</p></td>
+<td style="text-align: center;"><p>0.7</p></td>
+<td style="text-align: center;"><p>0.3</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.2</p></td>
+<td style="text-align: center;"><p>0.1</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="older_woman">👵</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="child">🧒</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="older_woman">👵</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="child">🧒</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="child">🧒</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+</tr>
+</tbody>
+</table>
+
+## Bad AUROC does not necessarily mean a Bad model
+
+This model has AUROC = 0.83, but the number is misleading:\
+The Target Population is well defined.
+
++-------+-----+-----+-----+-----+-----+
+| Age   | 64  | 56  | 78  | 67  | 73  |
++:=====:+:===:+:===:+:===:+:===:+:===:+
+| **p̂** | 0.3 | 0.4 | 0.4 | 0.2 | 0.1 |
++-------+-----+-----+-----+-----+-----+
+| **Y** | 0   | 1   | 1   | 1   | 0   |
++-------+-----+-----+-----+-----+-----+
+|       | \   | \   | \   | \   | \   |
+|       | 🤨  | 🤢  | 🤢  | 🤢  | 🤨  |
++-------+-----+-----+-----+-----+-----+
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events
+```
+:::
+
+::: {.column width="34%"}
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents 
+```
+:::
+:::
+
+![](cindex_binary_4_b.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0.875}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events
+```
+:::
+
+::: {.column width="34%"}
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents 
+```
+:::
+:::
+
+![](cindex_binary_4_b_with_age.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0.875}\end{aligned}$
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+```{r}
+split_gt_events
+```
+:::
+
+::: {.column width="34%"}
+:::
+
+::: {.column width="33%"}
+```{r}
+split_gt_nonevents 
+```
+:::
+:::
+
+![](cindex_binary_4_b_with_age_better_target_population.svg){fig-align="center"}
+
+$\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{5}}{\text{8}} = 0.625}\end{aligned}$
+
+## Lift Curve
+
+| Curve             | Sens | Spec | PPV | PPCR  | Lift  |
+|:------------------|:----:|:----:|:---:|:-----:|:-----:|
+| ROC               |  y   |  x   |     |       |       |
+| **Lift**          |      |      |     | **x** | **y** |
+| Precision- Recall |  x   |      |  y  |       |       |
+| Gains             |  y   |      |     |   x   |       |
+
+## Lift Curve
+
+$\begin{aligned} \text{Lift} = \frac{\text{PPV}}{\text{Prevalence}} = \frac{\cfrac{\text{TP}}{\text{TP + FP}}}{\cfrac{\text{TP + FN}}{\text{TP + FP + TN + FN}}} \end{aligned}$
+
+## Lift Curve
+
+-   Lift is the ratio between the PPV and the Prevalence.
+
+-   Lift Curve displays Lift on the Y axis and PPCR (Predicted Positives Conditional Rate) on the X axis.
+
+-   In other words, lift shows how much the prediction is doing better than a random guess in terms of PPV.
+
+-   The reference line stands for a random guess: the Lift is equal to 1 (PPV = Prevalence), the Sensitivity depends on the Probability Threshold or PPCR.
+
+-   The Curve is not defined if there are no Predicted Positives (probability threshold is too high or PPCR = 0).
+
+## Lift Curve
+
+```{r}
+create_lift_curve(
+  size = 500,
+  probs = list(example_dat$estimated_probabilities),
+  reals = list(example_dat$outcome)
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
+
+## Precision-Recall
+
+| Curve                 | Sens  | Spec |  PPV  | PPCR | Lift |
+|:----------------------|:-----:|:----:|:-----:|:----:|:----:|
+| ROC                   |   y   |  x   |       |      |      |
+| Lift                  |       |      |       |  x   |  y   |
+| **Precision- Recall** | **x** |      | **y** |      |      |
+| Gains                 |   y   |      |       |  x   |      |
+
+## Precision Recall Curve
+
+-   Precision-Recall Curve displays PPV on the y axis and Sensitivity on the x axis.
+
+-   The reference line stands for a random guess: the PPV is equal to the Prevalence, the Sensitivity depends on the Probability Threshold or PPCR.
+
+-   The Curve is not defined if there are no Predicted Positives (probability threshold is too high or PPCR = 0).
+
+## Precision Recall
+
+```{r}
+create_precision_recall_curve(
+  size = 500,
+  probs = list(example_dat$estimated_probabilities),
+  reals = list(example_dat$outcome)
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
+
+## Gains Curve
+
+| Curve             | Sens  | Spec | PPV | PPCR  | Lift |
+|:------------------|:-----:|:----:|:---:|:-----:|:----:|
+| ROC               |   y   |  x   |     |       |      |
+| Lift              |       |      |     |   x   |  y   |
+| Precision- Recall |   x   |      |  y  |       |      |
+| **Gains**         | **y** |      |     | **x** |      |
+
+## Gains Curve
+
+-   Gains Curve displays Sensitivity on the y axis and PPCR on the x axis.
+
+-   Gains shows the Sensitivity for a given PPCR.
+
+-   Reference Line for a Random Guess: The sensitivity is equal to the proportion of predicted positives.
+
+-   Reference Line for a Perfect Prediction: All Predicted Positives are Real Positives until there are no more Real Positives (PPCR = Prevalence, Sensitivity = 1).
+
+## Gains Curve
+
+```{r}
+create_gains_curve(
+  size = 500,
+  probs = list(example_dat$estimated_probabilities),
+  reals = list(example_dat$outcome)
+) |> 
+  plotly::layout(
+    plot_bgcolor  = "rgba(0, 0, 0, 0)",
+    paper_bgcolor = "rgba(0, 0, 0, 0)",
+    fig_bgcolor   = "rgba(0, 0, 0, 0)"
+    )
+```
