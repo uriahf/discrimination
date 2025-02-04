@@ -1,17 +1,106 @@
 ---
-title: "discrimination"
 format:
   revealjs:
     incremental: true
     html-table-processing: none
-preload-iframes: true
+    preview-links: true
+    chalkboard: true
+    slide-number: true
 ---
 
-# Discrimination 🖖 {background-iframe="emojis/index.html"}
+# Discrimination 🖖
+
+## Agenda
+
+In this talk we'll go through the following topics:
+
+-   **Cutting Through the Confusion of the Confusion Matrix:** Techniques for Choosing Cutoffs in Order to Translate Predictions into Binary Decisions: The Probability Threshold vs. the PPCR Approach ✂️
+
+-   **ROC Curve:** What it means and why I don't like it 😤
+
+-   **Lift (& Gains) Curve:** What is the Lift of the prediction model? 🏋️
+
+-   **Precision-Recall:** short description (Not a big fan of this one as well). 😤
+
+## Code for Performance Metrics and Curves
+
+All interactive plots in this presentation were created with [**rtichoke**](https://uriahf.github.io/rtichoke/) (I am the author 👋).
+
+![](https://rtichoke-blog.netlify.app/gaston_rtichoke.png){width="200"}
+
+You are also invited to explore [**rtichoke blog**](https://rtichoke-blog.netlify.app/) for reproducible examples and some theory.
+
+## Motivation
+
+### Why using performance metrics? 🥇🥈🥉
+
+-   Compare different candidate models.
+-   Selecting features.
+-   Evaluate if the prediction model will do more harm than good.
+
+## Categories of Performance Metrics and Curves
+
+-   **Discrimination 🖖**: Model's ability to separate between events and non-events.
+
+-   **Calibration ⚖️**: Agreement between predicted probabilities and the observed outcomes.
+
+-   **Utility 👌**: The usefulness of the model in terms of decision-making.
+
+------------------------------------------------------------------------
+
+::::::: columns
+:::: {.column width="50%"}
+### [Green]{style="color: green;"} {style="text-align: center; font-size: 200px;"}
+
+::: {style="height:123px; width:100%; clear:both;"}
+:::
+
+### **🙂** {style="text-align: center; font-size: 120px;"}
+::::
+
+:::: {.column width="50%"}
+### [Red]{style="color: red;"} {style="text-align: center; font-size: 200px;"}
+
+::: {style="height:123px; width:100%; clear:both;"}
+:::
+
+### **🙁** {style="text-align: center; font-size: 120px;"}
+::::
+:::::::
+
+------------------------------------------------------------------------
+
+::::::: columns
+:::: {.column width="50%"}
+### [Green]{style="color: green;"} {style="text-align: center; font-size: 200px;"}
+
+::: {style="height: 0px; width:100%; clear:both;"}
+:::
+
+![](Maccabi_Haifa_FC_Logo_2023.png){fig-align="center" width="260"}
+::::
+
+:::: {.column width="50%"}
+### [Red]{style="color: red;"} {style="text-align: center; font-size: 200px;"}
+
+::: {style="height: 55px; width:100%; clear:both;"}
+:::
+
+![](Hapoel_Haifa_Football_Club_Logo.png){fig-align="center" width="258"}
+::::
+:::::::
 
 ## Discrimination 🖖
 
 This is the most known and used category of performance metrics and curves.
+
+\[TODO: add explanations\]
+
+# **Cutting Through the Confusion of the Confusion Matrix** ✂️
+
+## Decision Tree
+
+![](decision_tree_mermaid_2.svg){fig-align="center" width="117"}
 
 ## [True Positives]{style="color: green;"} {.smaller}
 
@@ -30,9 +119,6 @@ tibble::tribble(
   "Real Negative", "FP", "TN"
 ) |> 
   reactable::reactable(
-    theme = reactable::reactableTheme(
-      backgroundColor = "#fdf6e3"
-    ),
     sortable = FALSE,
             fullWidth = FALSE,
             borderless = FALSE,
@@ -83,9 +169,6 @@ tibble::tribble(
   "Real Negative", "FP", "TN"
 ) |> 
   reactable::reactable(
-    theme = reactable::reactableTheme(
-      backgroundColor = "#fdf6e3"
-    ),
     sortable = FALSE,
             fullWidth = FALSE,
             borderless = FALSE,
@@ -136,9 +219,6 @@ tibble::tribble(
   "Real Negative", "FP", "TN"
 ) |> 
   reactable::reactable(
-    theme = reactable::reactableTheme(
-      backgroundColor = "#fdf6e3"
-    ),
     sortable = FALSE,
             fullWidth = FALSE,
             borderless = FALSE,
@@ -176,7 +256,7 @@ tibble::tribble(
 
 ## [True Negatives]{style="color: green;"} {.smaller}
 
-### Not-Infected and Predicted as Not-Infected - [BAD]{style="color: green;"}
+### Not-Infected and Predicted as Not-Infected - [GOOD]{style="color: green;"}
 
 <br> [🤨]{style="font-size: 50px;"}
 
@@ -188,9 +268,6 @@ tibble::tribble(
   "Real Negative", "FP", "TN"
 ) |> 
   reactable::reactable(
-    theme = reactable::reactableTheme(
-      backgroundColor = "#fdf6e3"
-    ),
     sortable = FALSE,
             fullWidth = FALSE,
             borderless = FALSE,
@@ -240,44 +317,36 @@ tibble::tribble(
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.11</p></td>
+<td style="text-align: center;"><p>0.15</p></td>
+<td style="text-align: center;"><p>0.18</p></td>
+<td style="text-align: center;"><p>0.29</p></td>
+<td style="text-align: center;"><p>0.31</p></td>
+<td style="text-align: center;"><p>0.33</p></td>
+<td style="text-align: center;"><p>0.45</p></td>
+<td style="text-align: center;"><p>0.47</p></td>
+<td style="text-align: center;"><p>0.63</p></td>
+<td style="text-align: center;"><p>0.72</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><p><strong>Y</strong></p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
@@ -286,6 +355,14 @@ tibble::tribble(
 <span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -301,83 +378,81 @@ Low Probability Threshold means that I'm worried about the **outcome**:
 ## Probability Threshold of 0.25
 
 <table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><p><strong>p̂</strong></p></th>
-<th style="text-align: center;"><p>0.3</p></th>
-<th style="text-align: center;"><p>0.6</p></th>
-<th style="text-align: center;"><p>0.4</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-<th style="text-align: center;"><p>0.4</p></th>
-<th style="text-align: center;"><p>0.7</p></th>
-<th style="text-align: center;"><p>0.3</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-<th style="text-align: center;"><p>0.2</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.11</p></td>
+<td style="text-align: center;"><p>0.15</p></td>
+<td style="text-align: center;"><p>0.18</p></td>
+<td style="text-align: center;"><p>0.29</p></td>
+<td style="text-align: center;"><p>0.31</p></td>
+<td style="text-align: center;"><p>0.33</p></td>
+<td style="text-align: center;"><p>0.45</p></td>
+<td style="text-align: center;"><p>0.47</p></td>
+<td style="text-align: center;"><p>0.63</p></td>
+<td style="text-align: center;"><p>0.72</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><p><strong>Y</strong></p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
 <td style="text-align: center;"><p><strong>TN</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
 <td style="text-align: center;"><p><strong>TN</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
 <td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
 </tr>
 </tbody>
 </table>
@@ -395,83 +470,81 @@ High Probability Threshold means that I'm worried about the **Intervention**:
 ## Probability Threshold of 0.55
 
 <table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><p><strong>p̂</strong></p></th>
-<th style="text-align: center;"><p>0.3</p></th>
-<th style="text-align: center;"><p>0.6</p></th>
-<th style="text-align: center;"><p>0.4</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-<th style="text-align: center;"><p>0.4</p></th>
-<th style="text-align: center;"><p>0.7</p></th>
-<th style="text-align: center;"><p>0.3</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-<th style="text-align: center;"><p>0.2</p></th>
-<th style="text-align: center;"><p>0.1</p></th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p><strong>p̂</strong></p></td>
+<td style="text-align: center;"><p>0.11</p></td>
+<td style="text-align: center;"><p>0.15</p></td>
+<td style="text-align: center;"><p>0.18</p></td>
+<td style="text-align: center;"><p>0.29</p></td>
+<td style="text-align: center;"><p>0.31</p></td>
+<td style="text-align: center;"><p>0.33</p></td>
+<td style="text-align: center;"><p>0.45</p></td>
+<td style="text-align: center;"><p>0.47</p></td>
+<td style="text-align: center;"><p>0.63</p></td>
+<td style="text-align: center;"><p>0.72</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><p><strong>Y</strong></p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
 <td style="text-align: center;"><p><strong>TN</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>TN</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
 <td style="text-align: center;"><p><strong>TN</strong></p></td>
 <td style="text-align: center;"><p><strong>TN</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
 <td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
+<td style="text-align: center;"><p><strong>TP</strong></p></td>
 </tr>
 </tbody>
 </table>
@@ -489,19 +562,32 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 ## PPCR of 0.1
 
 <table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.11</p></td>
+<td style="text-align: center;"><p>0.15</p></td>
+<td style="text-align: center;"><p>0.18</p></td>
+<td style="text-align: center;"><p>0.29</p></td>
+<td style="text-align: center;"><p>0.31</p></td>
+<td style="text-align: center;"><p>0.33</p></td>
+<td style="text-align: center;"><p>0.45</p></td>
+<td style="text-align: center;"><p>0.47</p></td>
+<td style="text-align: center;"><p>0.63</p></td>
+<td style="text-align: center;"><p>0.72</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><p><strong>R</strong></p></td>
@@ -517,6 +603,19 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+</tr>
+<tr class="even">
 <td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
@@ -529,33 +628,12 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>Y</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
 <tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
@@ -564,6 +642,14 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 <span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"></td>
@@ -584,73 +670,78 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 ## PPCR of 0.1
 
 <table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
+<td style="text-align: center;"><p>0.11</p></td>
+<td style="text-align: center;"><p>0.15</p></td>
+<td style="text-align: center;"><p>0.18</p></td>
+<td style="text-align: center;"><p>0.29</p></td>
+<td style="text-align: center;"><p>0.31</p></td>
+<td style="text-align: center;"><p>0.33</p></td>
+<td style="text-align: center;"><p>0.45</p></td>
+<td style="text-align: center;"><p>0.47</p></td>
+<td style="text-align: center;"><p>0.63</p></td>
+<td style="text-align: center;"><p>0.72</p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><p><strong>R</strong></p></td>
-<td style="text-align: center;"><p>5.5</p></td>
-<td style="text-align: center;"><p>2</p></td>
-<td style="text-align: center;"><p>3.5</p></td>
+<td style="text-align: center;"><p>10</p></td>
 <td style="text-align: center;"><p>9</p></td>
-<td style="text-align: center;"><p>3.5</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>5.5</p></td>
-<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>8</p></td>
 <td style="text-align: center;"><p>7</p></td>
-<td style="text-align: center;"><p>9</p></td>
+<td style="text-align: center;"><p>6</p></td>
+<td style="text-align: center;"><p>5</p></td>
+<td style="text-align: center;"><p>4</p></td>
+<td style="text-align: center;"><p>3</p></td>
+<td style="text-align: center;"><p>2</p></td>
+<td style="text-align: center;"><p>1</p></td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;"><p><strong>Y</strong></p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>0</p></td>
+<td style="text-align: center;"><p>1</p></td>
+<td style="text-align: center;"><p>1</p></td>
+</tr>
+<tr class="even">
 <td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>Y</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>0</p></td>
 <td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span> <br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
 <td style="text-align: center;"><p><br />
@@ -659,26 +750,32 @@ $\begin{aligned} \ {\scriptsize \frac{\text{TP + FP}}{\text{TP + FP + TN + FN}}}
 <span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 <td style="text-align: center;"><p><br />
 <span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
+<td style="text-align: center;"><p><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
+<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span><br />
+<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FP</strong></p></td>
 <td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
 <td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
+<td style="text-align: center;"><p><strong>TN</strong></p></td>
+<td style="text-align: center;"><p><strong>FN</strong></p></td>
 <td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
 </tr>
 </tbody>
 </table>
 
 ## 
-
-![](line%20of%20patients/line%20-%20Copy%20-%20Copy%2001.svg)
 
 ::::: columns
 ::: {.column width="50%"}
@@ -1327,198 +1424,7 @@ create_rtichoke_curve_by_frame(
 :::
 :::::
 
-## 
-
-## PPCR of 0.1
-
-![](line%20of%20patients/line_ppcr_01_before.svg)
-
-## PPCR of 0.1
-
-![](line%20of%20patients/line_ppcr_01_before.svg)
-
-::::: columns
-::: {.column width="70%"}
-![](line%20of%20patients/line_ppcr_01_before.svg)
-
-```{r}
-
-tibble::tribble(
-  ~"type", ~"predicted_positive", ~"predicted_negative",
-  "Real Positive", "TP", "FN",
-  "Real Negative", "FP", "TN"
-) |> 
-  reactable::reactable(
-    theme = reactable::reactableTheme(
-      backgroundColor = "#fdf6e3"
-    ),
-    sortable = FALSE,
-            fullWidth = FALSE,
-            borderless = FALSE,
-            defaultColDef = reactable::colDef(
-              align = "center",
-              headerStyle  = list(fontWeight = 100)
-            ),
-            columns = list(
-              type = reactable::colDef(
-                name = "",
-                align = "left",
-                style = list(fontWeight = 100),
-                minWidth = 200
-              ),
-              predicted_positive = reactable::colDef(
-                name = "Predicted Positive",
-                style = function(value) {
-                  color <- if (value == "TP") {
-                    "lightgreen"
-                  }
-                  
-                  list(fontWeight = 600, background = color)
-                },
-                minWidth = 200
-            ),
-            predicted_negative = reactable::colDef(
-              name = "Predicted Negative",
-              style = function(value) {
-                list(fontWeight = 600)
-              },
-                minWidth = 200
-            )
-            )
-  )
-```
-:::
-
-::: {.column width="30%"}
-```{r}
-library(rtichoke)
-
-prepare_performance_data(
-    probs = list(example_dat$estimated_probabilities),
-    reals = list(example_dat$outcome),
-    stratified_by = "ppcr", 
-    by = 0.1
-) |> 
-    plot_lift_curve(size = 300)
-```
-:::
-:::::
-
-## PPCR of 0.1
-
-![](line%20of%20patients/line_ppcr_01_before.svg)
-
-<table>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>R</strong></p></td>
-<td style="text-align: center;"><p>5.5</p></td>
-<td style="text-align: center;"><p>2</p></td>
-<td style="text-align: center;"><p>3.5</p></td>
-<td style="text-align: center;"><p>9</p></td>
-<td style="text-align: center;"><p>3.5</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>5.5</p></td>
-<td style="text-align: center;"><p>9</p></td>
-<td style="text-align: center;"><p>7</p></td>
-<td style="text-align: center;"><p>9</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><p><strong>Ŷ</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>Y</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><span class="emoji" data-emoji="pill">💊</span> <br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>TP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-<td style="text-align: center;"><p><strong>FP</strong></p></td>
-<td style="text-align: center;"><p><strong>FN</strong></p></td>
-</tr>
-</tbody>
-</table>
-
-## PPCR of 0.1
-
-::::: columns
-::: {.column width="60%"}
-![](line%20of%20patients/line_ppcr_01_before.svg)
-:::
-
-::: {.column width="40%"}
-:::
-:::::
-
-## PPCR of 0.1
-
-![](line%20of%20patients/line_ppcr_01_after.svg)
-
-## PPCR of 1
-
-![](line%20of%20patients/line_ppcr_1_before.svg)
+# ROC Curve
 
 ## Discrimination - Performance Curves
 
@@ -1540,14 +1446,16 @@ prepare_performance_data(
 
 ## ROC Curve
 
+::::: columns
+::: {.column width="50%"}
 -   The most famous form of Performance Metrics Visualization
 
--   Displays Sensitivity (also known as True Positive Rate or Percision) on the y axis
+-   Displays Sensitivity (also known as True Positive Rate or Recall) on the y axis
 
 -   Displays 1 - Specificity (also known as False Positive Rate) on the x axis.
+:::
 
-## ROC Curve
-
+::: {.column width="50%"}
 ```{r}
 library(rtichoke)
 
@@ -1562,6 +1470,8 @@ create_roc_curve(
     fig_bgcolor   = "rgba(0, 0, 0, 0)"
     )
 ```
+:::
+:::::
 
 ## Why I don't like ROC Curve 😤 {.smaller}
 
@@ -2362,7 +2272,6 @@ split_gt_nonevents
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{21}}{\text{24}} = 0.875}\end{aligned}$
 
-
 ------------------------------------------------------------------------
 
 ## Why I don't like ROC Curve 😤
@@ -2422,164 +2331,39 @@ counts_elements / 10000
 
 AUROC shows how well your model discriminates between events and non-events given a target population.
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><p>Age</p></th>
-<th style="text-align: center;"><p>64</p></th>
-<th style="text-align: center;"><p>86</p></th>
-<th style="text-align: center;"><p>56</p></th>
-<th style="text-align: center;"><p>7</p></th>
-<th style="text-align: center;"><p>78</p></th>
-<th style="text-align: center;"><p>85</p></th>
-<th style="text-align: center;"><p>6</p></th>
-<th style="text-align: center;"><p>12</p></th>
-<th style="text-align: center;"><p>67</p></th>
-<th style="text-align: center;"><p>73</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>Y</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-</tr>
-</tbody>
-</table>
+|       |      |      |      |      |      |      |      |      |      |      |
+|:-----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|       |      |      |      |      |      |      |      |      |      |      |
+| **p̂** | 0.11 | 0.15 | 0.18 | 0.29 | 0.31 | 0.33 | 0.45 | 0.47 | 0.63 | 0.72 |
+| **Y** |  0   |  0   |  0   |  0   |  1   |  0   |  1   |  0   |  1   |  1   |
+|       |  🤨  |  🤨  |  🤨  |  🤨  |  🤢  |  🤨  |  🤢  |  🤨  |  🤢  |  🤢  |
 
 ## Good AUROC does not necessarily mean a Good model
 
-This model has AUROC = 0.92, but the number is misleading:\
+This model has AUROC = 0.875, but the number is misleading:\
 The Target Population is not well defined.
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><p>Age</p></th>
-<th style="text-align: center;"><p>64</p></th>
-<th style="text-align: center;"><p>86</p></th>
-<th style="text-align: center;"><p>56</p></th>
-<th style="text-align: center;"><p>7</p></th>
-<th style="text-align: center;"><p>78</p></th>
-<th style="text-align: center;"><p>85</p></th>
-<th style="text-align: center;"><p>6</p></th>
-<th style="text-align: center;"><p>12</p></th>
-<th style="text-align: center;"><p>67</p></th>
-<th style="text-align: center;"><p>73</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><p><strong>p̂</strong></p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.6</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.4</p></td>
-<td style="text-align: center;"><p>0.7</p></td>
-<td style="text-align: center;"><p>0.3</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-<td style="text-align: center;"><p>0.2</p></td>
-<td style="text-align: center;"><p>0.1</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><p><strong>Y</strong></p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>0</p></td>
-<td style="text-align: center;"><p>1</p></td>
-<td style="text-align: center;"><p>0</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="older_woman">👵</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="child">🧒</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="older_woman">👵</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="child">🧒</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="child">🧒</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="nauseated_face">🤢</span></p></td>
-<td style="text-align: center;"><p><br />
-<span class="emoji" data-emoji="raised_eyebrow">🤨</span></p></td>
-</tr>
-</tbody>
-</table>
+|          |      |      |      |      |      |      |      |      |      |      |
+|:--------:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| **Age**  |  6   |  7   |  12  |  56  |  64  |  67  |  73  |  78  |  85  |  86  |
+|  **p̂**   | 0.11 | 0.15 | 0.18 | 0.29 | 0.31 | 0.33 | 0.45 | 0.47 | 0.63 | 0.72 |
+|  **Y**   |  0   |  0   |  0   |  0   |  1   |  0   |  1   |  0   |  1   |  1   |
+|          |  🧒  |  🧒  |  🤨  |  🤨  |  🤢  |  🤨  |  🤢  |  🤨  |  👵  |  👵  |
 
 ## Bad AUROC does not necessarily mean a Bad model
 
-This model has AUROC = 0.83, but the number is misleading:\
+This model has AUROC = 0.625, but the number is misleading:\
 The Target Population is well defined.
 
-+-------+-----+-----+-----+-----+-----+
-| Age   | 64  | 56  | 78  | 67  | 73  |
-+:=====:+:===:+:===:+:===:+:===:+:===:+
-| **p̂** | 0.3 | 0.4 | 0.4 | 0.2 | 0.1 |
-+-------+-----+-----+-----+-----+-----+
-| **Y** | 0   | 1   | 1   | 1   | 0   |
-+-------+-----+-----+-----+-----+-----+
-|       | \   | \   | \   | \   | \   |
-|       | 🤨  | 🤢  | 🤢  | 🤢  | 🤨  |
-+-------+-----+-----+-----+-----+-----+
++:--------:+:-------:+:-------:+:-------:+:-------:+:-------:+:-------:+
+| **Age**  | 12      | 56      | 64      | 67      | 73      | 78      |
++----------+---------+---------+---------+---------+---------+---------+
+| **p̂**    | 0.18    | 0.29    | 0.31    | 0.33    | 0.45    | 0.47    |
++----------+---------+---------+---------+---------+---------+---------+
+| **Y**    | 0       | 0       | 1       | 0       | 1       | 0       |
++----------+---------+---------+---------+---------+---------+---------+
+|          | 🤨      | 🤨      | 🤢      | 🤨      | 🤢      | 🤨      |
++----------+---------+---------+---------+---------+---------+---------+
 
 ------------------------------------------------------------------------
 
@@ -2649,6 +2433,8 @@ split_gt_nonevents
 ![](cindex_binary_4_b_with_age_better_target_population.svg){fig-align="center"}
 
 $\begin{aligned} \ {\scriptsize \text{C-index} = \frac{\text{5}}{\text{8}} = 0.625}\end{aligned}$
+
+# **Lift (& Gains) Curve**
 
 ## Lift Curve
 
@@ -2755,4 +2541,3 @@ create_gains_curve(
     fig_bgcolor   = "rgba(0, 0, 0, 0)"
     )
 ```
-

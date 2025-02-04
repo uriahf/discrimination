@@ -2,3 +2,7 @@
   netlify:
     - id: 763ffd68-8a32-4e8d-85bf-04487812d417
       url: https://predictionperformancediscrimination.netlify.app
+- source: index.qmd
+  netlify:
+    - id: 8271931c-97e1-493d-8919-cbac1ae845d0
+      url: https://astonishing-phoenix-817c1c.netlify.app
